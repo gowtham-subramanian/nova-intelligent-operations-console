@@ -1,0 +1,22 @@
+[project]
+name = "nova-intelligent-operations-console"
+version = "0.1.0"
+description = "Python-based operations job management system with layered architecture and automated testing"
+readme = "README.md"
+authors = [
+    { name = "Gowtham Subramanian", email = "gowtham90.dev@gmail.com" }
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+nova-intelligent-operations-console = "nova_intelligent_operations_console:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
