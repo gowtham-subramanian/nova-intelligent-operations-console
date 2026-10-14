@@ -21,18 +21,13 @@ class JobService:
             priority:JobPriority,
     ) -> Job:
 
-        existing_job = self.repository.get(job_id)
-
-        if existing_job is not None:
-            raise ValueError(f"Job with Id {job_id} Already Exists")
-
         job = Job(
             job_id = job_id,
             name = name,
             priority = priority,
         )
         
-        self.repository.save(job)
+        self.repository.add(job)
 
         return job
 
@@ -56,6 +51,6 @@ class JobService:
             return None
 
         job.status = status
-        self.repository.save(job)
+        self.repository.update(job)
 
         return job

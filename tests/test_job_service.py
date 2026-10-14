@@ -87,6 +87,17 @@ def test_update_job_status():
     assert job.status == JobStatus.RUNNING
 
 
+def test_update_missing_job_returns_none():
+    repository = InMemoryJobRepository()
+    service = JobService(repository)
+    job = service.update_job_status(
+        job_id=999,
+        status=JobStatus.RUNNING,
+    )
+
+    assert job is None
+
+
 def test_delete_job():
     repository = InMemoryJobRepository()
     service = JobService(repository)
@@ -114,7 +125,7 @@ def test_create_job_rejects_duplicate_job():
         priority = JobPriority.HIGH,
     )
 
-    with pytest.raises(ValueError, match = "Job with Id 101 Already Exists"):
+    with pytest.raises(ValueError, match = "Job with ID 101 Already Exists"):
         service.create_job(
             job_id = 101,
             name = "Inventory report",
