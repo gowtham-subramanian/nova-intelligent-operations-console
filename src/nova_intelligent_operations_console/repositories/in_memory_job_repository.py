@@ -8,7 +8,18 @@ class InMemoryJobRepository(JobRepository):
     def __init__(self) -> None:
         self._jobs: dict[int, Job] = {}
 
-    def save(self, job : Job) -> None:
+    def add(self, job : Job) -> None:
+        if job.job_id in self._jobs:
+            raise ValueError(
+                f"Job with ID {job.job_id} Already Exists."
+            )
+        self._jobs[job.job_id] = job
+
+    def update(self, job: Job)->None:
+        if job.job_id not in self._jobs:
+            raise ValueError(
+                f"Job with ID {job.job_id} does not exists."
+            )
         self._jobs[job.job_id] = job
 
     def get(self, job_id: int) -> Job | None:
