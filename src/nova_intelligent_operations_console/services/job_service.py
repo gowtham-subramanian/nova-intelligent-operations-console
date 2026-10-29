@@ -50,7 +50,7 @@ class JobService:
         if job is None:
             return None
 
-        job.status = status
+        job.transition_to(status)
         self.repository.update(job)
 
         return job
